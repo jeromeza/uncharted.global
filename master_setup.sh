@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash
 
 printf %"$COLUMNS"s |tr " " "-"
 printf %"$COLUMNS"s |tr " " "-"
@@ -41,7 +41,8 @@ gcloud projects add-iam-policy-binding terraforming-uncharted3 --member 'user:to
 printf %"$COLUMNS"s |tr " " "-"
 echo "APPLYING TERRAFORM - DEPLOYING GKE CLUSTER - PLEASE WAIT..."
 printf %"$COLUMNS"s |tr " " "-"
-export project_id=terraforming-uncharted3
-export master_authorized_networks=192.145.137.18/32
+export TF_VAR_project_id=terraforming-uncharted3
+USER_IP=$(curl -s ifconfig.me)
+sed -i "s/whitelist/$USER_IP\/32/g" main.tf
 ./tooling/terraform init
-./tooling/terraform plan -var="project_id=[${project_id}]" -var="master_authorized_networks=[${master_authorized_networks}]"
+./tooling/terraform plan -var project_id="uncharted5"

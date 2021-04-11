@@ -56,4 +56,4 @@ gcloud auth application-default login
 USER_IP=$(curl -s ifconfig.me)
 sed -i "s/whitelist/$USER_IP\/32/g" main.tf
 ./tooling/terraform init
-./tooling/terraform plan -var project_id="$1"
+printf 'yes' | ./tooling/terraform apply -var project_id="$1"

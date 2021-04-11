@@ -61,5 +61,5 @@ export INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress
 printf %"$COLUMNS"s |tr " " "-"
 echo "YOUR WEBSITE SHOULD BE LIVE ON THE BELOW IP"
 printf %"$COLUMNS"s |tr " " "-"
-sleep 120
+sleep 180
 echo $INGRESS_IP

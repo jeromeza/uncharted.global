@@ -57,3 +57,18 @@ USER_IP=$(curl -s ifconfig.me)
 sed -i "s/whitelist/$USER_IP\/32/g" main.tf
 ./tooling/terraform init
 printf 'yes' | ./tooling/terraform apply -var project_id="$1"
+
+# Apply Helm chart to setup webserver 
+# Bundling Helm here as it's easy to upgrade / group k8s resources
+printf %"$COLUMNS"s |tr " " "-"
+echo "DEPLOYING WEBSERVER VIA HELM CHART - PLEASE WAIT..."
+printf %"$COLUMNS"s |tr " " "-"
+./tooling/helm install webserver webserver_chart/ --kubeconfig ./kubeconfig-prod --set Image=nginx
+sleep 30
+INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress | tail -n1 | awk {'print $4'})
+sleep 40
+
+printf %"$COLUMNS"s |tr " " "-"
+echo "YOUR WEBSITE SHOULD BE LIVE ON THE BELOW IP"
+printf %"$COLUMNS"s |tr " " "-"
+echo $INGRESS_IP

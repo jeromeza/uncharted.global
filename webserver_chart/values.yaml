@@ -1,2 +1,2 @@
 Image: "nginx"
-HtmlPath: "/var/www/html/"
+HtmlPath: "/usr/share/nginx/html"

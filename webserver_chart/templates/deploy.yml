@@ -34,7 +34,7 @@ spec:
       initContainers:
       - name: init
         image: alpine
-        command: ['sh', '-c', 'echo "Hello Uncharted Test" > "{{ .Values.HtmlPath }}"']
+        command: ['sh', '-c', 'echo "Hello Uncharted Test" > "/usr/share/nginx/html/index.html"']
         volumeMounts:
         - name: shared-data
           mountPath: "{{ .Values.HtmlPath }}"

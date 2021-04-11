@@ -2,7 +2,7 @@
 GKE assignment
 
 ### **--- Clone repo: ---**  
-$ git clone https://github.com/jeromeza/uncharted.global.git. 
+$ git clone https://github.com/jeromeza/uncharted.global.git   
   
 ### **--- Usage: ---**       
 $ cd uncharted.global/   

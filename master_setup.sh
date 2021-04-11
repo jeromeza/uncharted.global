@@ -56,7 +56,7 @@ echo "DEPLOYING WEBSERVER VIA HELM CHART - PLEASE WAIT..."
 printf %"$COLUMNS"s |tr " " "-"
 ./tooling/helm install webserver webserver_chart/ --kubeconfig ./kubeconfig-prod --set Image=nginx
 sleep 30
-export INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress | tail -n1 | awk {'print $4'})
+export INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress)
 sleep 50
 
 printf %"$COLUMNS"s |tr " " "-"

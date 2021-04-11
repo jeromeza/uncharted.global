@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: "{{ .Values.Image }}"
+  name: "{{ .Values.Image }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "{{ .Values.Image }}"
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.Image }}"
+    spec:
+      volumes:
+      - name: shared-data
+        emptyDir: {}
+
+      containers:
+      - name: "{{ .Values.Image  }}"
+        image: "{{ .Values.Image }}"
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+        volumeMounts:
+        - name: shared-data
+          mountPath: "{{ .Values.HtmlPath }}"
+
+      initContainers:
+      - name: init
+        image: alpine
+        command: ['sh', '-c', 'echo "Hello Uncharted Test" > "{{ .Values.HtmlPath }}"']
+        volumeMounts:
+        - name: shared-data
+          mountPath: "{{ .Values.HtmlPath }}"

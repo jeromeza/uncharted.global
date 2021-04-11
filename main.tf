@@ -45,7 +45,7 @@ module "gke" {
   subnetwork             	= module.gcp-network.subnets_names[0]
   ip_range_pods          	= var.ip_range_pods_name
   ip_range_services      	= var.ip_range_services_name
-  master_authorized_networks = [{ cidr_block = "188.166.112.252/32", display_name = "Whitelisted access" }, ]  
+  master_authorized_networks = [{ cidr_block = "whitelist", display_name = "Whitelisted access" }, ]  
 
   node_pools = [
     {

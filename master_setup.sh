@@ -2,21 +2,12 @@
 # Check for project argument as $1 - if not present, abort
 if [ -z "$*" ]; then echo "Please specify a unique project name" && exit 0; fi
 
-# Install prerequisites tooling like git and clone repo
-printf %"$COLUMNS"s |tr " " "-"
-printf %"$COLUMNS"s |tr " " "-"
-echo "INSTALLING PREREQUISITES AND CLONING REPO"
-printf %"$COLUMNS"s |tr " " "-"
-printf "\n" ; apt install git -y
-git clone https://github.com/jeromeza/uncharted.global.git
-
 # Install and auth to GCP SDK as your GCP user
 # This is needed to create the GCP project (on the free tier) - as you cannot do this via Terraform - mainly because you cannot create an organization via a service account - which TF runs as
 # See: https://stackoverflow.com/questions/62385602/making-a-gcp-project-in-cli-without-being-able-to-make-a-parent-as-a-trial-user
 printf %"$COLUMNS"s |tr " " "-"
 echo "INSTALLING GCLOUD SDK FOR PROGRAMMATIC CLI ACCESS"
 printf %"$COLUMNS"s |tr " " "-"
-cd uncharted.global
 bash install.sh --disable-prompts
 CLOUDSDK_CORE_DISABLE_PROMPTS=1 ~/./google-cloud-sdk/install.sh
 source ~/./google-cloud-sdk/path.bash.inc
@@ -53,7 +44,7 @@ printf %"$COLUMNS"s |tr " " "-"
 echo "APPLYING TERRAFORM - DEPLOYING GKE CLUSTER - PLEASE WAIT..."
 printf %"$COLUMNS"s |tr " " "-"
 gcloud auth application-default login
-USER_IP=$(curl -s ifconfig.me)
+export USER_IP=$(/usr/bin/curl -s ifconfig.me)
 sed -i "s/whitelist/$USER_IP\/32/g" main.tf
 ./tooling/terraform init
 printf 'yes' | ./tooling/terraform apply -var project_id="$1"
@@ -65,8 +56,8 @@ echo "DEPLOYING WEBSERVER VIA HELM CHART - PLEASE WAIT..."
 printf %"$COLUMNS"s |tr " " "-"
 ./tooling/helm install webserver webserver_chart/ --kubeconfig ./kubeconfig-prod --set Image=nginx
 sleep 30
-INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress | tail -n1 | awk {'print $4'})
-sleep 40
+export INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress | tail -n1 | awk {'print $4'})
+sleep 50
 
 printf %"$COLUMNS"s |tr " " "-"
 echo "YOUR WEBSITE SHOULD BE LIVE ON THE BELOW IP"

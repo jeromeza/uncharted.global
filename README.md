@@ -25,6 +25,7 @@ As per PDF supplied
 ### **--- Improvments: (done) ---**       
 - Add in Helm to group k8s resources and allow for easier deployments (done)
 - Add in hpa (horizontal pod autoscaler) to show scaling on CPU / memory etc (done)
+- Add in Prometheus for monitoring / metrics dashboard (username: admin password: prom-operator) (done) 
 
 **To test the hpa:**  
 $ ./stress YOUR_INGRESS_IP_HERE  
@@ -34,7 +35,6 @@ $ ./stress YOUR_INGRESS_IP_HERE
 **NOTE** that it auto scales based on CPU usage, and the number of pods will increase as this climbs
 
 ### **--- Future Improvements: (to do) ---**    
-- Add in Prometheus for monitoring / metrics dashboard
 - Add in persistent storage / volume claims, to ensure pod logging persists
 - Adding in ELK stack for centralized logging / log interrogation
 - Add SSL to ingress

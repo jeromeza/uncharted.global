@@ -57,7 +57,7 @@ printf %"$COLUMNS"s |tr " " "-"
 ./tooling/helm install webserver webserver_chart/ --kubeconfig ./kubeconfig-prod --set Image=nginx
 
 printf %"$COLUMNS"s |tr " " "-"
-echo "YOUR WEBSITE SHOULD BE LIVE ON THE BELOW IP"
+echo "YOUR WEBSITE WILL BE AVAILABLE ON THE BELOW IP ADDRESS - WITHIN THE NEXT FEW MINS"
 printf %"$COLUMNS"s |tr " " "-"
 sleep 120
 export INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress | tail -n1 | awk {'print $4'})

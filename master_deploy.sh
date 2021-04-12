@@ -68,7 +68,7 @@ printf %"$COLUMNS"s |tr " " "-"
 ./tooling/kubectl --kubeconfig ./kubeconfig-prod apply -f prometheus_chart/templates/ingress.yml
 
 printf %"$COLUMNS"s |tr " " "-"
-echo "YOUR WEBSITE SHOULD BE LIVE ON THE BELOW IP - WITHIN THE NEXT FEW MINUTES"
+echo "YOUR WEBSITE WILL BE AVAILABLE ON THE BELOW IP ADDRESS - WITHIN THE NEXT FEW MINS"
 printf %"$COLUMNS"s |tr " " "-"
 sleep 120
 export INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress | tail -n1 | awk {'print $4'})

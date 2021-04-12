@@ -26,6 +26,13 @@ As per PDF supplied
 - Add in Helm to group k8s resources and allow for easier deployments (done)
 - Add in hpa (horizontal pod autoscaler) to show scaling on CPU / memory etc (done)
 
+**To test the hpa:**  
+$ ./stress YOUR_INGRESS_IP_HERE  
+./tooling/kubectl --kubeconfig ./kubeconfig-prod get hpa  
+./tooling/kubectl --kubeconfig ./kubeconfig-prod get pods  
+
+**NOTE** that it auto scales based on CPU usage, and the number of pods will increase as this climbs
+
 ### **--- Future Improvements: (to do) ---**    
 - Add in Prometheus for monitoring / metrics dashboard
 - Add in persistent storage / volume claims, to ensure pod logging persists

@@ -72,10 +72,10 @@ echo "YOUR WEBSITE WILL BE AVAILABLE ON THE BELOW IP ADDRESS - WITHIN THE NEXT F
 printf %"$COLUMNS"s |tr " " "-"
 sleep 120
 export INGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress | tail -n1 | awk {'print $4'})
-echo $INGRESS_IP
+echo "http://$INGRESS_IP"
 
 printf %"$COLUMNS"s |tr " " "-"
 echo "YOUR GRAFANA DASHBOARDS WILL BE AVAILABLE ON THE BELOW IP ADDRESS - WITHIN THE NEXT FEW MINS"
 printf %"$COLUMNS"s |tr " " "-"
 export PROMINGRESS_IP=$(./tooling/kubectl --kubeconfig ./kubeconfig-prod get ingress -n monitor | tail -n1 | awk {'print $4'})
-echo $PROMINGRESS_IP
+echo "http://$PROMINGRESS_IP"

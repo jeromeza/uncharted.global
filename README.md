@@ -29,5 +29,6 @@ As per PDF supplied
 ### **--- Future Improvements: (to do) ---**    
 - Add in Prometheus for monitoring / metrics dashboard
 - Add in persistent storage / volume claims, to ensure pod logging persists
+- Adding in ELK stack for centralized logging / log interrogation
 - Add SSL to ingress
 - Proxy behind something like CloudFlare for DDoS protection / CDN (asset caching, speed) etc

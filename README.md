@@ -1,5 +1,5 @@
 # uncharted.global
-GKE assignment
+GKE assignment - **TESTED and RUN on UBUNTU 20.04 LTS**
 
 ### **--- Clone repo: ---**  
 $ git clone https://github.com/jeromeza/uncharted.global.git   
